@@ -1,6 +1,8 @@
 import os
 
-from monkeytoolbox import expand_path
+import pytest
+
+from monkeytoolbox import InvalidPath, expand_path
 
 
 def test_expand_user(patched_home_env):
@@ -15,3 +17,8 @@ def test_expand_vars(patched_home_env):
     expected_path = os.path.join(patched_home_env, "test")
 
     assert expand_path(input_path) == expected_path
+
+
+def test_expand_path__empty_path_provided():
+    with pytest.raises(InvalidPath):
+        expand_path("")
