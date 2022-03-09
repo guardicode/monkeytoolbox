@@ -9,7 +9,7 @@ from monkeytoolbox.threading import (
 
 
 def test_create_daemon_thread():
-    thread = create_daemon_thread(lambda: None)
+    thread = create_daemon_thread(lambda: None, name="test")
     assert thread.daemon
 
 
