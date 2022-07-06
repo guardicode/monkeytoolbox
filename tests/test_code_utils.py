@@ -1,6 +1,6 @@
 from queue import Queue
 
-from monkeytoolbox import queue_to_list
+from monkeytoolbox import del_key, queue_to_list
 
 
 def test_empty_queue_to_empty_list():
@@ -20,3 +20,23 @@ def test_queue_to_list():
     list_ = queue_to_list(q)
 
     assert list_ == expected_list
+
+
+def test_del_key__deletes_key():
+    key_to_delete = "a"
+    my_dict = {"a": 1, "b": 2}
+    expected_dict = {k: v for k, v in my_dict.items() if k != key_to_delete}
+
+    del_key(my_dict, key_to_delete)
+
+    assert my_dict == expected_dict
+
+
+def test_del_key__nonexistant_key():
+    key_to_delete = "a"
+    my_dict = {"a": 1, "b": 2}
+
+    del_key(my_dict, key_to_delete)
+
+    # This test passes if the following call does not raise an error
+    del_key(my_dict, key_to_delete)
