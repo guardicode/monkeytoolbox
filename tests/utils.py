@@ -1,6 +1,6 @@
 from pathlib import WindowsPath
 
-from common.utils.operating_system import is_windows_os
+from monkeytoolbox import is_windows_os
 
 if is_windows_os():
     import win32api
