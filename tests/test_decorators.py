@@ -1,5 +1,4 @@
 import time
-from unittest.mock import MagicMock
 
 from monkeytoolbox import request_cache
 
