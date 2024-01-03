@@ -3,7 +3,7 @@ import stat
 from pathlib import Path
 from typing import Callable
 
-from ..environment import is_windows_os
+from . import is_windows_os
 
 if is_windows_os():
     import win32file

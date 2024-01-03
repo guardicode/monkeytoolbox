@@ -3,10 +3,10 @@ import os
 import stat
 
 import pytest
-from tests.monkey_island.utils import assert_linux_permissions, assert_windows_permissions
+from tests.utils import assert_linux_permissions, assert_windows_permissions
 
-from monkeytoolbox import is_windows_os
 from monkeytoolbox import (
+    is_windows_os,
     append_bytes,
     create_secure_directory,
     make_fileobj_copy,
