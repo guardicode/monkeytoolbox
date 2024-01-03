@@ -1,9 +1,10 @@
 import pytest
-from monkeytoolbox import is_windows_os
+from monkeytoolbox import get_os
+from monkeytypes import OperatingSystem
 
 @pytest.fixture
 def home_env_variable():
-    if is_windows_os():
+    if get_os() == OperatingSystem.WINDOWS:
         return "%USERPROFILE%"
     else:
         return "$HOME"

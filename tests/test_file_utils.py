@@ -6,14 +6,18 @@ import pytest
 from tests.utils import assert_linux_permissions, assert_windows_permissions
 
 from monkeytoolbox import (
-    is_windows_os,
+    get_os,
     append_bytes,
     create_secure_directory,
     make_fileobj_copy,
     open_new_securely_permissioned_file,
 )
 from monkeytoolbox.secure_directory import FailedDirectoryCreationError
+from monkeytypes import OperatingSystem
 
+
+def is_windows_os():
+    return get_os() == OperatingSystem.WINDOWS
 
 @pytest.fixture
 def test_path_nested(tmp_path):

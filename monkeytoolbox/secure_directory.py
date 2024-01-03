@@ -3,13 +3,15 @@ import stat
 from pathlib import Path
 from typing import Callable
 
-from . import is_windows_os
+from . import get_os
 
-if is_windows_os():
+from monkeytypes import OperatingSystem
+
+if get_os() == OperatingSystem.WINDOWS:
     import win32file
     import win32security
 
-    from .. import windows_permissions
+    from .windows_permissions import get_security_descriptor_for_owner_only_permissions
 
 logger = logging.getLogger(__name__)
 
@@ -19,7 +21,7 @@ class FailedDirectoryCreationError(Exception):
 
 
 def create_secure_directory(path: Path):
-    if is_windows_os():
+    if get_os() == OperatingSystem.WINDOWS:
         make_existing_directory_secure_for_os = _make_existing_directory_secure_windows
         create_secure_directory_for_os = _create_secure_directory_windows
     else:
@@ -64,7 +66,7 @@ def _create_secure_directory(fn_for_os: Callable, path: Path):
 
 
 def _make_existing_directory_secure_windows(path: Path):
-    security_descriptor = windows_permissions.get_security_descriptor_for_owner_only_permissions()
+    security_descriptor = get_security_descriptor_for_owner_only_permissions()
     win32security.SetFileSecurity(
         str(path), win32security.DACL_SECURITY_INFORMATION, security_descriptor
     )
@@ -73,7 +75,7 @@ def _make_existing_directory_secure_windows(path: Path):
 def _create_secure_directory_windows(path: Path):
     security_attributes = win32security.SECURITY_ATTRIBUTES()
     security_attributes.SECURITY_DESCRIPTOR = (
-        windows_permissions.get_security_descriptor_for_owner_only_permissions()
+        get_security_descriptor_for_owner_only_permissions()
     )
     win32file.CreateDirectory(str(path), security_attributes)
 

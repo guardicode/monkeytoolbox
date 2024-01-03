@@ -1,4 +1,4 @@
-from .environment import is_windows_os
+from .environment import get_os
 from .decorators import request_cache
 from .code_utils import (
     apply_filters,

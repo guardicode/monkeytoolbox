@@ -4,14 +4,15 @@ import stat
 from contextlib import contextmanager
 from typing import Generator
 
-from . import is_windows_os
+from . import get_os
+from monkeytypes import OperatingSystem
 
-if is_windows_os():
+if get_os() == OperatingSystem.WINDOWS:
     import win32file
     import win32job
     import win32security
 
-    from .. import windows_permissions
+    from .windows_permissions import get_security_descriptor_for_owner_only_permissions
 
 
 logger = logging.getLogger(__name__)
@@ -19,7 +20,7 @@ logger = logging.getLogger(__name__)
 
 @contextmanager
 def open_new_securely_permissioned_file(path: str, mode: str = "w") -> Generator:
-    if is_windows_os():
+    if get_os() == OperatingSystem.WINDOWS:
         # TODO: Switch from string to Path object to avoid this hack.
         fd = _get_file_descriptor_for_new_secure_file_windows(str(path))
     else:
@@ -55,7 +56,7 @@ def _get_file_descriptor_for_new_secure_file_windows(path: str) -> int:
 
         security_attributes = win32security.SECURITY_ATTRIBUTES()
         security_attributes.SECURITY_DESCRIPTOR = (
-            windows_permissions.get_security_descriptor_for_owner_only_permissions()
+            get_security_descriptor_for_owner_only_permissions()
         )
         file_creation = win32file.CREATE_NEW  # fails if file exists
         file_attributes = win32file.FILE_FLAG_BACKUP_SEMANTICS
