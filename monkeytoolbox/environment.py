@@ -24,7 +24,7 @@ def _get_hardware_id_windows() -> HardwareID:
 
 
 def _get_hardware_id_linux() -> HardwareID:
-    # Different compile-time parameters for Python on Linux can cause `uuid. getnode()` to yield
+    # Different compile-time parameters for Python on Linux can cause `uuid.getnode()` to yield
     # different results. Calling `uuid._ip_getnode()` directly seems to be the most reliable way to
     # get consistend IDs across different Python binaries. See
     # https://github.com/guardicore/monkey/issues/3176 for more details
