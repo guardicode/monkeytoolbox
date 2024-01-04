@@ -4,8 +4,9 @@ import stat
 from contextlib import contextmanager
 from typing import Generator
 
-from . import get_os
 from monkeytypes import OperatingSystem
+
+from . import get_os
 
 if get_os() == OperatingSystem.WINDOWS:
     import win32file

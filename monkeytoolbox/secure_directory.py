@@ -3,9 +3,9 @@ import stat
 from pathlib import Path
 from typing import Callable
 
-from . import get_os
-
 from monkeytypes import OperatingSystem
+
+from . import get_os
 
 if get_os() == OperatingSystem.WINDOWS:
     import win32file
@@ -74,9 +74,7 @@ def _make_existing_directory_secure_windows(path: Path):
 
 def _create_secure_directory_windows(path: Path):
     security_attributes = win32security.SECURITY_ATTRIBUTES()
-    security_attributes.SECURITY_DESCRIPTOR = (
-        get_security_descriptor_for_owner_only_permissions()
-    )
+    security_attributes.SECURITY_DESCRIPTOR = get_security_descriptor_for_owner_only_permissions()
     win32file.CreateDirectory(str(path), security_attributes)
 
 

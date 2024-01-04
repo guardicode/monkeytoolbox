@@ -1,8 +1,9 @@
-from pathlib import PosixPath, WindowsPath, Path
+from pathlib import Path, PosixPath, WindowsPath
 from typing import Iterable
-from monkeytoolbox import get_os
 
 from monkeytypes import OperatingSystem
+
+from monkeytoolbox import get_os
 
 if get_os() == OperatingSystem.WINDOWS:
     import win32api
