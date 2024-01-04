@@ -1,19 +1,28 @@
-import io
 import os
 import stat
+from io import SEEK_SET, BytesIO
 
 import pytest
 from monkeytypes import OperatingSystem
 
 from monkeytoolbox import (
+    InvalidPath,
     append_bytes,
     create_secure_directory,
+    expand_path,
+    get_all_regular_files_in_directory,
+    get_binary_io_sha256_hash,
     get_os,
     make_fileobj_copy,
     open_new_securely_permissioned_file,
 )
 from monkeytoolbox.secure_directory import FailedDirectoryCreationError
-from tests.utils import assert_linux_permissions, assert_windows_permissions
+from tests.utils import (
+    add_files_to_dir,
+    add_subdirs_to_dir,
+    assert_linux_permissions,
+    assert_windows_permissions,
+)
 
 
 def is_windows_os():
@@ -146,7 +155,7 @@ def test_open_new_securely_permissioned_file__perm_windows(test_path):
 
 def test_make_fileobj_copy():
     TEST_STR = b"Hello World"
-    with io.BytesIO(TEST_STR) as src:
+    with BytesIO(TEST_STR) as src:
         dst = make_fileobj_copy(src)
 
         # Writing the assertion this way verifies that both src and dest file handles have had
@@ -157,7 +166,7 @@ def test_make_fileobj_copy():
 
 def test_make_fileobj_copy_seek_src_to_0():
     TEST_STR = b"Hello World"
-    with io.BytesIO(TEST_STR) as src:
+    with BytesIO(TEST_STR) as src:
         src.seek(int(len(TEST_STR) / 2))
         dst = make_fileobj_copy(src)
 
@@ -168,7 +177,7 @@ def test_make_fileobj_copy_seek_src_to_0():
 
 
 def test_append_bytes__pos_0():
-    bytes_io = io.BytesIO(b"1234 5678")
+    bytes_io = BytesIO(b"1234 5678")
 
     append_bytes(bytes_io, b"abcd")
 
@@ -176,11 +185,63 @@ def test_append_bytes__pos_0():
 
 
 def test_append_bytes__pos_5():
-    bytes_io = io.BytesIO(b"1234 5678")
-    bytes_io.seek(5, io.SEEK_SET)
+    bytes_io = BytesIO(b"1234 5678")
+    bytes_io.seek(5, SEEK_SET)
 
     append_bytes(bytes_io, b"abcd")
 
     assert bytes_io.read() == b"5678abcd"
-    bytes_io.seek(0, io.SEEK_SET)
+    bytes_io.seek(0, SEEK_SET)
     assert bytes_io.read() == b"1234 5678abcd"
+
+
+def test_expand_user(patched_home_env):
+    input_path = os.path.join("~", "test")
+    expected_path = patched_home_env / "test"
+
+    assert expand_path(input_path) == expected_path
+
+
+def test_expand_vars(home_env_variable, patched_home_env):
+    input_path = os.path.join(home_env_variable, "test")
+    expected_path = patched_home_env / "test"
+
+    assert expand_path(input_path) == expected_path
+
+
+def test_expand_path__empty_path_provided():
+    with pytest.raises(InvalidPath):
+        expand_path("")
+
+
+def test_get_binary_sha256_hash():
+    expected_hash = "a591a6d40bf420404a011733cfb7b190d62c65bf0bcda32b57b277d9ad9f146e"
+    assert get_binary_io_sha256_hash(BytesIO(b"Hello World")) == expected_hash
+
+
+SUBDIRS = ["subdir1", "subdir2"]
+FILES = ["file.jpg.zip", "file.xyz", "1.tar", "2.tgz", "2.png", "2.mpg"]
+
+
+def test_get_all_regular_files_in_directory__no_files(tmp_path, monkeypatch):
+    add_subdirs_to_dir(tmp_path, SUBDIRS)
+
+    assert len(list(get_all_regular_files_in_directory(tmp_path))) == 0
+
+
+def test_get_all_regular_files_in_directory__has_files(tmp_path, monkeypatch):
+    add_subdirs_to_dir(tmp_path, SUBDIRS)
+    files = add_files_to_dir(tmp_path, FILES)
+
+    expected_return_value = sorted(files)
+    assert sorted(get_all_regular_files_in_directory(tmp_path)) == expected_return_value
+
+
+def test_get_all_regular_files_in_directory__subdir_has_files(tmp_path, monkeypatch):
+    subdirs = list(add_subdirs_to_dir(tmp_path, SUBDIRS))
+    add_files_to_dir(subdirs[0], FILES)
+
+    files = add_files_to_dir(tmp_path, FILES)
+
+    expected_return_value = sorted(files)
+    assert sorted(get_all_regular_files_in_directory(tmp_path)) == expected_return_value
