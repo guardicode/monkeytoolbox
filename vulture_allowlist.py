@@ -10,6 +10,7 @@ from monkeytoolbox import (
     get_all_regular_files_in_directory,
     get_binary_io_sha256_hash,
     get_hardware_id,
+    get_hostname,
     get_my_ip_addresses,
     get_os_version,
     get_text_file_contents,
@@ -37,6 +38,7 @@ expand_path
 get_all_regular_files_in_directory
 get_binary_io_sha256_hash
 get_hardware_id
+get_hostname
 get_my_ip_addresses
 get_os_version
 get_text_file_contents

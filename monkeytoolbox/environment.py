@@ -1,4 +1,5 @@
 import platform
+import socket
 import uuid
 from contextlib import suppress
 
@@ -51,3 +52,7 @@ def _get_hardware_id_linux() -> HardwareID:
 
 def get_os_version() -> str:
     return platform.platform()
+
+
+def get_hostname():
+    return socket.gethostname()
