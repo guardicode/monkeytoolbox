@@ -47,3 +47,7 @@ def _get_hardware_id_linux() -> HardwareID:
         machine_id = uuid.getnode()
 
     return machine_id
+
+
+def get_os_version() -> str:
+    return platform.platform()

@@ -11,6 +11,7 @@ from monkeytoolbox import (
     get_binary_io_sha256_hash,
     get_hardware_id,
     get_my_ip_addresses,
+    get_os_version,
     get_text_file_contents,
     insecure_generate_random_string,
     interruptible_function,
@@ -37,6 +38,7 @@ get_all_regular_files_in_directory
 get_binary_io_sha256_hash
 get_hardware_id
 get_my_ip_addresses
+get_os_version
 get_text_file_contents
 insecure_generate_random_string
 interruptible_function

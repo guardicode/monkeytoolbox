@@ -1,4 +1,4 @@
-from .environment import get_os, get_hardware_id
+from .environment import get_hardware_id, get_os, get_os_version
 from .decorators import request_cache
 from .code_utils import (
     apply_filters,

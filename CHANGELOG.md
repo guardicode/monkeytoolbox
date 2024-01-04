@@ -9,6 +9,7 @@ the [PEP 440 version scheme](https://peps.python.org/pep-0440/#version-scheme).
 
 ## [Unreleased]
 ### Added
+- `get_os_version()`
 ### Changed
 - `get_os()` raises `RuntimeError` if the operating system is not supported
 ### Fixed
