@@ -30,7 +30,7 @@ def test_apply_filters__no_filters_provided():
 
 
 def test_empty_queue_to_empty_list():
-    q = Queue()
+    q: Queue = Queue()
 
     list_ = queue_to_list(q)
 
@@ -39,7 +39,7 @@ def test_empty_queue_to_empty_list():
 
 def test_queue_to_list():
     expected_list = [8, 6, 7, 5, 3, 0, 9]
-    q = Queue()
+    q: Queue = Queue()
     for i in expected_list:
         q.put(i)
 
