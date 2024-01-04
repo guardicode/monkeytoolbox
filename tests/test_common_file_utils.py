@@ -43,8 +43,7 @@ FILES = ["file.jpg.zip", "file.xyz", "1.tar", "2.tgz", "2.png", "2.mpg"]
 def test_get_all_regular_files_in_directory__no_files(tmp_path, monkeypatch):
     add_subdirs_to_dir(tmp_path, SUBDIRS)
 
-    expected_return_value = []
-    assert list(get_all_regular_files_in_directory(tmp_path)) == expected_return_value
+    assert len(list(get_all_regular_files_in_directory(tmp_path))) == 0
 
 
 def test_get_all_regular_files_in_directory__has_files(tmp_path, monkeypatch):
@@ -56,7 +55,7 @@ def test_get_all_regular_files_in_directory__has_files(tmp_path, monkeypatch):
 
 
 def test_get_all_regular_files_in_directory__subdir_has_files(tmp_path, monkeypatch):
-    subdirs = add_subdirs_to_dir(tmp_path, SUBDIRS)
+    subdirs = list(add_subdirs_to_dir(tmp_path, SUBDIRS))
     add_files_to_dir(subdirs[0], FILES)
 
     files = add_files_to_dir(tmp_path, FILES)
