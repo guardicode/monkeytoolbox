@@ -3,7 +3,7 @@ from itertools import zip_longest
 from threading import Event, current_thread
 from typing import Any
 
-from monkeytoolbox.threading import (
+from monkeytoolbox import (
     ThreadSafeIterator,
     create_daemon_thread,
     interruptible_function,
