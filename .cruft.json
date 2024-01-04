@@ -1,6 +1,6 @@
 {
   "template": "https://github.com/guardicode/infection-monkey-cookiecutter",
-  "commit": "ecf843de87f18890e15caa3ef6dd3495973ba31b",
+  "commit": "04292f82e0b0bdb7ea1f4266f385d7b9cdc88b78",
   "checkout": null,
   "context": {
     "cookiecutter": {
@@ -19,6 +19,7 @@
       "project_short_description": "Miscellaneous convenience utilities for Python programs",
       "python_major_version": "3",
       "python_minor_version": "11",
+      "support_type_checking": "y",
       "hook_shellcheck": "n",
       "codecov": "y",
       "travis_ci": "y",

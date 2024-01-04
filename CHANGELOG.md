@@ -11,6 +11,7 @@ the [PEP 440 version scheme](https://peps.python.org/pep-0440/#version-scheme).
 ### Added
 - `get_os_version()`
 - `get_hostname()`
+- Support for type checking (py.typed marker file)
 
 ### Changed
 - `get_os()` raises `RuntimeError` if the operating system is not supported
