@@ -2,7 +2,6 @@ import os
 from io import BytesIO
 
 import pytest
-from tests.utils import add_files_to_dir, add_subdirs_to_dir
 
 from monkeytoolbox import (
     InvalidPath,
@@ -10,6 +9,7 @@ from monkeytoolbox import (
     get_all_regular_files_in_directory,
     get_binary_io_sha256_hash,
 )
+from tests.utils import add_files_to_dir, add_subdirs_to_dir
 
 
 def test_expand_user(patched_home_env):
