@@ -7,6 +7,11 @@ Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to
 the [PEP 440 version scheme](https://peps.python.org/pep-0440/#version-scheme).
 
 
+## [Unreleased]
+### Fixed
+- The location of the `py.typed` file so that type checking is now properly
+  supported
+
 ## [v0.2.0 - 2024-01-04]
 ### Added
 - `get_os_version()`
