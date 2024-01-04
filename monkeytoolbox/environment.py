@@ -6,10 +6,21 @@ from monkeytypes import HardwareID, OperatingSystem
 
 
 def get_os() -> OperatingSystem:
-    if platform.system() == "Windows":
+    """
+    Get the OperatingSystem of the current execution environment.
+
+    :return: The OperatingSystem of the current execution environment
+    :raises: RuntimeError if the current OperatingSystem is not supported
+    """
+    system = platform.system()
+
+    if system == "Windows":
         return OperatingSystem.WINDOWS
 
-    return OperatingSystem.LINUX
+    if system == "Linux":
+        return OperatingSystem.LINUX
+
+    raise RuntimeError(f"'{system}' is not a supported operating system")
 
 
 def get_hardware_id() -> HardwareID:
