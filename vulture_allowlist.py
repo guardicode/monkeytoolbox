@@ -20,6 +20,7 @@ from monkeytoolbox import (
     port_is_used,
     queue_to_list,
     request_cache,
+    run_worker_threads,
     secure_generate_random_string,
 )
 
@@ -45,4 +46,5 @@ open_new_securely_permissioned_file
 port_is_used
 queue_to_list
 request_cache
+run_worker_threads
 secure_generate_random_string

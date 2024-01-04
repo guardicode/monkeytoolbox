@@ -10,25 +10,30 @@ from monkeytypes import Event
 logger = logging.getLogger(__name__)
 
 
-def run_worker_threads(
-    target: Callable[..., None],
-    name_prefix: str,
-    args: Tuple = (),
-    num_workers: int = 2,
-):
-    worker_threads = []
-    counter = run_worker_threads.counters.setdefault(name_prefix, count(start=1))
-    for i in range(0, num_workers):
-        name = f"{name_prefix}-{next(counter):02d}"
-        t = create_daemon_thread(target=target, name=name, args=args)
-        t.start()
-        worker_threads.append(t)
+class RunWorkerThreads:
+    def __init__(self):
+        self._counters = {}
 
-    for t in worker_threads:
-        t.join()
+    def __call__(
+        self,
+        target: Callable[..., None],
+        name_prefix: str,
+        args: Tuple = (),
+        num_workers: int = 2,
+    ):
+        worker_threads = []
+        counter = self._counters.setdefault(name_prefix, count(start=1))
+        for i in range(0, num_workers):
+            name = f"{name_prefix}-{next(counter):02d}"
+            t = create_daemon_thread(target=target, name=name, args=args)
+            t.start()
+            worker_threads.append(t)
+
+        for t in worker_threads:
+            t.join()
 
 
-run_worker_threads.counters = {}
+run_worker_threads = RunWorkerThreads()
 
 
 def create_daemon_thread(target: Callable[..., None], name: str, args: Tuple = ()) -> Thread:
