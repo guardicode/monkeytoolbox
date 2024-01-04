@@ -61,10 +61,10 @@ def test_interruptible_iter_interrupted_before_used():
 
 
 def test_worker_thread_names():
-    thread_names = set()
+    thread_names: list[str] = []
 
     def add_thread_name_to_list():
-        thread_names.add(current_thread().name)
+        thread_names.append(current_thread().name)
 
     run_worker_threads(target=add_thread_name_to_list, name_prefix="A", num_workers=2)
     run_worker_threads(target=add_thread_name_to_list, name_prefix="B", num_workers=2)
