@@ -2,7 +2,7 @@ import threading
 from functools import wraps
 from typing import Any, Callable
 
-from egg_timer import EggTimer
+from eggtimer import EggTimer
 
 
 def request_cache(ttl: float):
