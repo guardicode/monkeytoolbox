@@ -1,6 +1,6 @@
 import ipaddress
 from ipaddress import IPv4Address, IPv4Interface
-from typing import Iterable, List, Optional, Sequence
+from typing import Iterable, Optional, Sequence
 
 import ifaddr
 import psutil
@@ -10,7 +10,7 @@ def get_my_ip_addresses() -> Sequence[IPv4Address]:
     return [interface.ip for interface in get_network_interfaces()]
 
 
-def get_network_interfaces() -> List[IPv4Interface]:
+def get_network_interfaces() -> list[IPv4Interface]:
     local_interfaces = []
     for adapter in ifaddr.get_adapters():
         for ip in _select_ipv4_ips(adapter.ips):
@@ -41,7 +41,7 @@ def port_is_used(
 def get_connections(
     ports: Optional[Sequence[int]] = None,
     ip_addresses: Optional[Sequence[IPv4Address]] = None,
-) -> List[psutil._common.sconn]:
+) -> list[psutil._common.sconn]:
     connections = psutil.net_connections()
     if ports:
         connections = [connection for connection in connections if connection.laddr.port in ports]

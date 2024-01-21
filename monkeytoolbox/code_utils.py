@@ -4,7 +4,7 @@ import random
 import secrets
 import string
 from threading import Event, Thread
-from typing import Any, Callable, Iterable, List, MutableMapping, Optional, TypeVar
+from typing import Any, Callable, Iterable, MutableMapping, Optional, TypeVar
 
 T = TypeVar("T")
 
@@ -26,7 +26,7 @@ def apply_filters(filters: Iterable[Callable[[T], bool]], iterable: Iterable[T])
     return filtered_iterable
 
 
-def queue_to_list(q: queue.Queue) -> List[Any]:
+def queue_to_list(q: queue.Queue) -> list[Any]:
     list_ = []
     try:
         while True:
