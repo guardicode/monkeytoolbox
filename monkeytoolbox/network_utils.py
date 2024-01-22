@@ -1,7 +1,7 @@
 import ipaddress
 from ipaddress import IPv4Address, IPv4Interface
-from typing import Optional, Sequence
-from collections.abc import Iterable
+from typing import Optional
+from collections.abc import Iterable, Sequence
 
 import ifaddr
 import psutil
