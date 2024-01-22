@@ -1,5 +1,5 @@
 from pathlib import Path, PosixPath, WindowsPath
-from typing import Iterable
+from collections.abc import Iterable
 
 from monkeytypes import OperatingSystem
 

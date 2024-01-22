@@ -4,7 +4,8 @@ import logging
 import os
 import shutil
 from pathlib import Path
-from typing import BinaryIO, Iterable
+from typing import BinaryIO
+from collections.abc import Iterable
 
 logger = logging.getLogger(__name__)
 
