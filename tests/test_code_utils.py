@@ -1,5 +1,5 @@
 from queue import Queue
-from typing import Callable
+from collections.abc import Callable
 
 import pytest
 

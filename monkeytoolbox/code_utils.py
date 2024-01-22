@@ -4,8 +4,8 @@ import random
 import secrets
 import string
 from threading import Event, Thread
-from typing import Any, Callable, MutableMapping, Optional, TypeVar
-from collections.abc import Iterable
+from typing import Any, MutableMapping, Optional, TypeVar
+from collections.abc import Iterable, Callable
 
 T = TypeVar("T")
 
