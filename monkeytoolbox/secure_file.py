@@ -2,7 +2,7 @@ import logging
 import os
 import stat
 from contextlib import contextmanager
-from typing import Generator
+from collections.abc import Generator
 
 from monkeytypes import OperatingSystem
 
