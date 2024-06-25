@@ -10,6 +10,7 @@ the [PEP 440 version scheme](https://peps.python.org/pep-0440/#version-scheme).
 ## [Unreleased]
 ### Fixed
 - Error that prevents monkeytoolbox from being imported on Darwin. #6
+- Import error in `open_new_securely_permissioned_file()` on Windows. #6
 
 ## [0.3.0] - 2024-01-16
 ### Fixed

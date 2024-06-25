@@ -14,6 +14,8 @@ try:
         import win32file
         import win32job
         import win32security
+
+        from .windows_permissions import get_security_descriptor_for_owner_only_permissions
 except RuntimeError:
     # The most likely cause of this error is that this module has been imported
     # on MacOS (Darwin). While the code in this module may or may not function
