@@ -1,20 +1,31 @@
 import logging
 import os
 import stat
-from contextlib import contextmanager
+import warnings
 from collections.abc import Generator
+from contextlib import contextmanager
 
 from monkeytypes import OperatingSystem
 
 from . import get_os
 
-if get_os() == OperatingSystem.WINDOWS:
-    import win32file
-    import win32job
-    import win32security
+try:
+    if get_os() == OperatingSystem.WINDOWS:
+        import win32file
+        import win32job
+        import win32security
 
-    from .windows_permissions import get_security_descriptor_for_owner_only_permissions
-
+        from .windows_permissions import get_security_descriptor_for_owner_only_permissions
+except RuntimeError:
+    # The most likely cause of this error is that this module has been imported
+    # on MacOS (Darwin). While the code in this module may or may not function
+    # properly on Darwin, there is code within this package That is platform
+    # agnostic. This error, if not caught, will prevent this entire package
+    # from being imported, which is not the desired behavior.
+    warnings.warn(
+        "OS compatibility check failed: This package may not work properly on this OS.",
+        ImportWarning,
+    )
 
 logger = logging.getLogger(__name__)
 
