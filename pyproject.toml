@@ -43,7 +43,7 @@ paths = ["monkeytoolbox", "vulture_allowlist.py"]
 
 [tool.poetry]
 name = "monkeytoolbox"
-version = "v0.3.0"
+version = "v0.4.0"
 description = "Miscellaneous convenience utilities for Python programs"
 authors = [
     "Ilija Lazoroski <ilija.la@live.com>",

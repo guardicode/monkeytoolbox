@@ -3,7 +3,8 @@ import threading
 from functools import wraps
 from itertools import count
 from threading import Lock, Thread
-from typing import Any, Callable, Iterable, Iterator, Optional, Tuple, TypeVar
+from typing import Any, Iterator, Optional, Tuple, TypeVar
+from collections.abc import Iterable, Callable
 
 from monkeytypes import Event
 
