@@ -7,7 +7,10 @@ Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to
 the [PEP 440 version scheme](https://peps.python.org/pep-0440/#version-scheme).
 
 
-## [0.4.0]
+## [1.0.0] - 2024-07-09
+This release is identical to 0.4.0.
+
+## [0.4.0] - 2024-06-25
 ### Fixed
 - Error that prevents monkeytoolbox from being imported on Darwin. #6
 - Import error in `open_new_securely_permissioned_file()` on Windows. #6
