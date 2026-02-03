@@ -1,7 +1,7 @@
 from ipaddress import IPv4Address
 from unittest.mock import MagicMock, Mock
 
-from psutil._common import addr
+from psutil._ntuples import addr
 
 from monkeytoolbox.network_utils import get_connections
 

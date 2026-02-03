@@ -7,6 +7,11 @@ Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to
 the [PEP 440 version scheme](https://peps.python.org/pep-0440/#version-scheme).
 
 
+## [1.0.1] - 2026-02-03
+### Fixed
+- A loose dependency specifier for the psutils dependency, which could render
+monkeytoolbox uninstallable or broken. #7
+
 ## [1.0.0] - 2024-07-09
 This release is identical to 0.4.0.
 
