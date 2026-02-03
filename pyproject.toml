@@ -43,7 +43,7 @@ paths = ["monkeytoolbox", "vulture_allowlist.py"]
 
 [tool.poetry]
 name = "monkeytoolbox"
-version = "v1.0.0"
+version = "v1.0.1"
 description = "Miscellaneous convenience utilities for Python programs"
 authors = [
     "Ilija Lazoroski <ilija.la@live.com>",
@@ -64,7 +64,7 @@ include = ["CHANGELOG.md", "README.md"]
 python = "^3.11"
 monkey-types = "*"
 egg-timer = "*"
-psutil = ">=5.7.0"
+psutil = "^7.2.2"
 ifaddr = "*"
 pywin32 = {version = "*", markers = "sys_platform == 'win32'"}
 

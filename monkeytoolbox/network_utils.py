@@ -1,7 +1,7 @@
 import ipaddress
+from collections.abc import Iterable, Sequence
 from ipaddress import IPv4Address, IPv4Interface
 from typing import Optional
-from collections.abc import Iterable, Sequence
 
 import ifaddr
 import psutil
@@ -42,7 +42,7 @@ def port_is_used(
 def get_connections(
     ports: Optional[Sequence[int]] = None,
     ip_addresses: Optional[Sequence[IPv4Address]] = None,
-) -> list[psutil._common.sconn]:
+) -> list[psutil._ntuples.sconn]:
     connections = psutil.net_connections()
     if ports:
         connections = [connection for connection in connections if connection.laddr.port in ports]
